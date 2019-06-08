@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "commit": "npx git-cz",
     "test": "jest"
   },
   "dependencies": {
@@ -23,5 +24,6 @@
     "preset": "react-native"
   },
   "config": {
+    "commitizen": {"path": "./node_modules/cz-emoji" }
   }
 }
