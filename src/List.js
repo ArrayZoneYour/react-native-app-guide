@@ -1,26 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, ScrollView, Text, StyleSheet } from 'react-native'
 import Button from './Button'
+import { useStore } from './models/Post'
+
+import icons from './assets/images'
 
 const List = () => {
+  const [{ posts }, actions] = useStore()
+  useEffect(() => {
+    actions.get()
+  }, [])
   return (
     <ScrollView style={{ paddingVertical: 20 }}>
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
-      <ListItem />
+      {posts.map(post => (
+        <ListItem {...post} key={post.id} />
+      ))}
       <View style={{ width: 20, height: 40 }} />
     </ScrollView>
   )
 }
 
-const ListItem = () => {
-  const title = '标题'
-  const content =
-    '我今天吃了10个包子\n我今天吃了10个包子\n我今天吃了10个包子\n我今天吃了10个包子\n我今天吃了10个包子\n我今天吃了10个包子\n我今天吃了10个包子\n我今天吃了10个包子\n我今天吃了10个包子\n我今天吃了10个包子\n'
+const ListItem = props => {
+  const { title, content } = props
   return (
     <View style={styles.listContainer}>
       <Text style={styles.title}>{title}</Text>
@@ -31,13 +32,16 @@ const ListItem = () => {
           style={styles.button}
           type="highlight"
           textStyle={{ color: 'pink' }}
-          text="xxx人b(￣▽￣)d"
+          text="7"
+          icon={icons.ThumbsUp}
         />
         <Button
           style={styles.button}
           type="highlight"
           textStyle={{ color: 'pink' }}
-          text="xxx人转发"
+          iconStyle={{ marginTop: 3 }}
+          text="1"
+          icon={icons.ThumbsDown}
         />
       </View>
     </View>
